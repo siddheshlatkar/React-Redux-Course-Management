@@ -10,6 +10,7 @@ import CreateCourse from "./CreateCourse";
 import TextField from "@material-ui/core/TextField/TextField";
 import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
+import AppsIcon from '@material-ui/icons/Apps';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = () => {
+const Header = ({gridLayout, alterLayout}) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <AppBar position={"static"}>
                 <Toolbar>
-                    <IconButton edge={"start"} className={classes.menuButton} color="inherit" aria-label={"menu"}>
-                        <MenuIcon/>
+                    <IconButton edge={"start"} className={classes.menuButton} color="inherit" aria-label={"menu"} onClick={alterLayout}>
+                        {gridLayout ? <MenuIcon/> : <AppsIcon/>}
                     </IconButton>
                     <Typography variant={"h6"} className={classes.title}>
                         Course Manager

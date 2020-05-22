@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,13 +64,16 @@ const CourseTable = () => {
                                     </Grid>
                                     <Grid item>
                                         <CardActions>
-                                            <CancelIcon style={{fill: "red"}}/>
-                                            {/*<EditIcon style={{fill: "blue", marginLeft: "auto"}}/>*/}
+                                            <IconButton>
+                                                <CancelIcon style={{fill: "red"}}/>
+                                            </IconButton>
                                         </CardActions>
                                     </Grid>
                                     <Grid item>
                                         <CardActions>
-                                            <EditIcon style={{fill: "blue", marginLeft: "auto"}}/>
+                                            <IconButton>
+                                                <EditIcon style={{fill: "blue", marginLeft: "auto"}}/>
+                                            </IconButton>
                                         </CardActions>
                                     </Grid>
                                 </Grid>
