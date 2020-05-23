@@ -27,26 +27,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CourseGrid = () => {
+const CourseGrid = ({courses}) => {
 
     const classes = useStyles();
-
     return (
         <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
                 <Grid container justify-content={"flex-start"} spacing={2}>
-                    {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-                        <Grid item key={value}>
+                    {courses.map((course) => (
+                        <Grid item key={course._id}>
                             <Card className={classes.card} >
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
-                                        CS5200
+                                        {course.courseName}
                                     </Typography>
                                     <Typography className={classes.pos} color="textSecondary">
-                                        Me
+                                        {course.ownedBy}
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        Thu, 21 May 2020 18:54:46 GMT
+                                        {course.createdAt}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

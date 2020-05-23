@@ -30,35 +30,35 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const CourseTable = () => {
+const CourseTable = ({courses}) => {
     const classes = useStyles();
 
     return (
         <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
                 <Grid container justify-content={"flex-start"} spacing={2}>
-                    {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-                        <Grid item key={value} xs={8}>
+                    {courses.map((course) => (
+                        <Grid item key={course._id} xs={8}>
                             <Card className={classes.card}>
                                 <Grid container className={classes.course_table} spacing={7}>
                                     <Grid item>
                                         <CardContent>
                                             <Typography variant="h5" component="h2">
-                                                CS5200
+                                                {course.courseName}
                                             </Typography>
                                         </CardContent>
                                     </Grid>
                                     <Grid item>
                                         <CardContent>
                                             <Typography className={classes.pos} color="textSecondary">
-                                                Me
+                                                {course.ownedBy}
                                             </Typography>
                                         </CardContent>
                                     </Grid>
                                     <Grid item>
                                         <CardContent>
                                             <Typography variant="body2" component="p">
-                                                Thu, 21 May 2020 18:54:46 GMT
+                                                {course.createdAt}
                                             </Typography>
                                         </CardContent>
                                     </Grid>
