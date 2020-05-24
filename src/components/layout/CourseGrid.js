@@ -8,6 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from "@material-ui/core/IconButton";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,9 +28,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CourseGrid = ({courses}) => {
+const CourseGrid = ({courses, deleteCourse}) => {
 
     const classes = useStyles();
+
+    const onDeleteClick = (course) => {
+        deleteCourse(course);
+    };
+
     return (
         <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
@@ -49,8 +55,8 @@ const CourseGrid = ({courses}) => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <IconButton>
-                                        <CancelIcon style={{fill: "red"}}/>
+                                    <IconButton onClick={() => onDeleteClick(course)}>
+                                        <CancelIcon style={{fill: "red"}} />
                                     </IconButton>
                                     <IconButton style={{marginLeft: "auto"}}>
                                         <EditIcon style={{fill: "blue"}}/>
@@ -63,6 +69,12 @@ const CourseGrid = ({courses}) => {
             </Grid>
         </Grid>
     );
+};
+
+
+CourseGrid.propTypes = {
+    courses: PropTypes.array.isRequired,
+    deleteCourse: PropTypes.func.isRequired,
 };
 
 export default CourseGrid;

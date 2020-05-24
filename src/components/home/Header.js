@@ -3,14 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CreateCourse from "./CreateCourse";
-import TextField from "@material-ui/core/TextField/TextField";
-import InputBase from '@material-ui/core/InputBase';
 import {fade} from "@material-ui/core";
 import AppsIcon from '@material-ui/icons/Apps';
+import PropTypes from "prop-types";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = ({gridLayout, alterLayout}) => {
+const Header = ({saveCourse, gridLayout, alterLayout}) => {
     const classes = useStyles();
 
     return (
@@ -53,11 +51,17 @@ const Header = ({gridLayout, alterLayout}) => {
                     <Typography variant={"h6"} className={classes.title}>
                         Course Manager
                     </Typography>
-                    <CreateCourse/>
+                    <CreateCourse saveCourse={saveCourse}/>
                 </Toolbar>
             </AppBar>
         </div>
     );
+};
+
+Header.propTypes = {
+    saveCourse: PropTypes.func.isRequired,
+    gridLayout: PropTypes.bool.isRequired,
+    alterLayout: PropTypes.func.isRequired,
 };
 
 export default Header;

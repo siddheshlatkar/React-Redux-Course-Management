@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import PropTypes from "prop-types";
-import apiCallsInProgress from "../../redux/reducers/apiStatusReducer";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const HomePage = (props) => {
@@ -15,7 +13,7 @@ const HomePage = (props) => {
 
     useEffect(() => {
         props.actions.loadCourses();
-    },[])
+    },[]);
 
     const alterLayout = () => {
         setGridLayout(!gridLayout);
@@ -23,14 +21,13 @@ const HomePage = (props) => {
 
     return (
         <div>
-            <Header gridLayout={gridLayout} alterLayout={alterLayout} />
-            {props.apiCallsInProgress > 0 ? <LinearProgress /> : gridLayout ? <CourseGrid courses={props.courses}/> : <CourseTable courses={props.courses}/>}
-            {/*{gridLayout ? <CourseGrid courses={props.courses}/> : <CourseTable courses={props.courses}/>}*/}
+            <Header saveCourse={props.actions.saveCourse} gridLayout={gridLayout} alterLayout={alterLayout} />
+            {props.apiCallsInProgress > 0 ? <LinearProgress /> : gridLayout ? <CourseGrid courses={props.courses} deleteCourse={props.actions.deleteCourse} /> :
+                                                                 <CourseTable courses={props.courses} deleteCourse={props.actions.deleteCourse} />}
         </div>
     );
 };
 
-//<CircularProgress size={300} styles={{alignSelf: "center"}} />
 
 HomePage.propTypes = {
     actions: PropTypes.object.isRequired,
@@ -47,6 +44,8 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
+            saveCourse: bindActionCreators(courseActions.saveCourse, dispatch),
+            deleteCourse: bindActionCreators(courseActions.deleteCourse, dispatch),
         }
     }
 }
